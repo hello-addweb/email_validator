@@ -1,6 +1,6 @@
 name: email_validator_package
 
-description: "A Email validator Flutter package is used to validate email addresses both in Dart and Flutter. It uses Regex for validation. It is purely based on Dart, with no other dependencies."
+description: "A Email validator Flutter package is used to validate email addresses both in Dart and Flutter."
 version: 0.0.1
 # author: AddWeb Solution Dev(Sultan Singh)
 homepage: https://github.com/hello-addweb/email_validator
