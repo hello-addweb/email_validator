@@ -1,39 +1,124 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+# Email Validator Package
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+```email_validator_package``` A Flutter Email validator package is used to validate email addresses both in Dart and Flutter. It uses Regex for validation. It is purely based on Dart, with no other dependencies. I shared a complete example of a project in which I have used this email validation in Flutter.  ✨
 
-## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## Installation
 
-## Getting started
+Create a new project with the command
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```yaml
+flutter create MyApp
+```
+
+Add
+
+```yaml
+email_validator_package: ...
+```
+
+to your `pubspec.yaml` of your flutter project.
+**OR**
+run
+
+```yaml
+flutter pub add email_validator_package
+```
+
+in your project's root directory.
+
+In your library add the following import:
+
+```dart
+import 'package:email_validator_package/email_validator_package.dart';
+```
+
+For help getting started with Flutter, view the online [documentation](https://flutter.io/).
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
 ```dart
-const like = 'sample';
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Email Validator Package',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    String email = "addweb@yopmail.com";
+    String email2 = 'invalid_email@';
+    bool isValidEmail = EmailValidator.validateEmail(email);
+    bool isValidEmail2 = EmailValidator.validateEmail(email2);
+
+    log("isValidEmail  $isValidEmail");
+    log("isValidEmail22  $isValidEmail2");
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Email Validation"),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            children: [
+              Text("$isValidEmail"),
+              TextFormField(
+                validator: (value) {
+                  /// your logic
+                  if (value!.isEmpty) {
+                    return "Please Enter Email";
+                  } else if (EmailValidator.validateEmail(value)) {
+                    return "Please Enter Valid Email";
+                  }
+                  return null;
+                },
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(),
+                  errorBorder: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(),
+                  disabledBorder: OutlineInputBorder(),
+                  focusedErrorBorder: OutlineInputBorder(),
+                  hintText: 'Email Address',
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 ```
 
-## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+## Constructor
+
+#### Basic
+
+| Parameter             | Default | Description               | Required |
+|-----------------------|:--------|:--------------------------|:--------:|
+| email                 | -       | User Input email.         |   True   |
